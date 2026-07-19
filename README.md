@@ -211,6 +211,13 @@ climate:
                 </a>
             </td>
             <td align="center">
+                <a href="https://github.com/damiensorel-sglk">
+                    <img src="https://avatars.githubusercontent.com/u/300380529?v=4" width="100;" alt="damiensorel-sglk"/>
+                    <br />
+                    <sub><b>damiensorel-sglk</b></sub>
+                </a>
+            </td>
+            <td align="center">
                 <a href="https://github.com/gnoto">
                     <img src="https://avatars.githubusercontent.com/u/54668134?v=4" width="100;" alt="gnoto"/>
                     <br />
