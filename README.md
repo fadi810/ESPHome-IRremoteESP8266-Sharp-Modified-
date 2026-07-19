@@ -38,13 +38,18 @@ climate:
 
 Replace `<platform_name>` by the name of one of the platforms available.
 
-It supports other options of [climate_ir](https://esphome.io/components/climate/climate_ir.html) like `sensor` and `transmitter_id`.
-
 > [!NOTE]
 > For platforms with a `model` option, please refer to the [supported Protocols page](https://github.com/crankyoldgit/IRremoteESP8266/blob/master/SupportedProtocols.md) ("A/C Model" column).
 
 > [!WARNING]
 > Only Arduino Framework is supported
+
+### Common options
+
+These options can be used with any platform :
+
+- `debounce` (Optional, Time): Prevent quick commands to ben sent, effectively batching updates. For example `200ms`.
+- other options of [climate_ir](https://esphome.io/components/climate/climate_ir.html) like `sensor` and `transmitter_id`.
 
 ## fujitsu
 
@@ -179,6 +184,7 @@ climate:
 
 ## Changelog
 
+- **2026.07.19**: Add `debounce` option to all platforms
 - **2026.06.06**: Add `horizontal_swing` to Fujitsu platform
 - **2026.05.16**: Add Eco and Powerful presets to Fujitsu platform
 - **2026.03.28**: Add Mitsubishi platform

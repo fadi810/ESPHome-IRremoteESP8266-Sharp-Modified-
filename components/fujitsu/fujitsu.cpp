@@ -47,7 +47,7 @@ namespace esphome
         void FujitsuClimate::transmit_state()
         {
             this->apply_state();
-            this->send();
+            this->send_debounced();
         }
 
         void FujitsuClimate::control(const climate::ClimateCall &call)

@@ -41,7 +41,11 @@ namespace esphome
         void PanasonicClimate::transmit_state()
         {
             this->apply_state();
+            this->send_debounced();
+        }
 
+        void PanasonicClimate::send()
+        {
             uint8_t *message = this->ac_.getRaw();
 
             sendGeneric(

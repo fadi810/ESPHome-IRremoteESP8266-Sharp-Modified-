@@ -18,7 +18,31 @@ namespace esphome
                             supports_dry, supports_fan_only,
                             fan_modes, swing_modes) {}
 
+            void set_debounce(uint32_t debounce)
+            {
+                this->debounce_ = debounce;
+            }
+
+            void send_debounced()
+            {
+                if (this->debounce_ > 0)
+                {
+                    this->set_timeout("send", this->debounce_, [this]() {
+                        this->send();
+                    });
+                }
+                else
+                {
+                    this->send();
+                }
+            }
+
         protected:
+            uint32_t debounce_ = 0;
+
+            virtual void send() = 0;
+            virtual void apply_state() = 0;
+
             void sendGeneric(
                 const uint16_t headermark, const uint32_t headerspace,
                 const uint16_t onemark, const uint32_t onespace,

@@ -25,11 +25,10 @@ namespace esphome
 
         protected:
             void transmit_state() override;
+            void send() override;
+            void apply_state() override;
 
         private:
-            void send();
-            void apply_state();
-
             IRFujitsuAC264 ac_ = IRFujitsuAC264(255); // pin is not used
         };
     } // namespace fujitsu_264

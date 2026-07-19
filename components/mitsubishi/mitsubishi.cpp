@@ -100,7 +100,7 @@ namespace esphome
         void MitsubishiClimate::transmit_state()
         {
             this->apply_state();
-            this->send();
+            this->send_debounced();
         }
 
         void MitsubishiClimate::send()

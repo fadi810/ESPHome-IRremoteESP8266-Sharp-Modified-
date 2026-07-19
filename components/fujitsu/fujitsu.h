@@ -58,10 +58,10 @@ namespace esphome
         protected:
             void transmit_state() override;
             void control(const climate::ClimateCall &call) override;
+            void send() override;
+            void apply_state() override;
 
         private:
-            void send();
-            void apply_state();
             void sync_preset_to_state();
 
             inline bool supports_horizontal_swing()

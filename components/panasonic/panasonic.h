@@ -34,8 +34,10 @@ namespace esphome
 
         protected:
             void transmit_state() override;
-            void apply_state();
+            void send() override;
+            void apply_state() override;
 
+        private:
             IRPanasonicAc ac_ = IRPanasonicAc(255); // pin is not used
         };
 

@@ -1,13 +1,18 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import climate_ir
+from esphome.const import  CONF_DEBOUNCE
 
 AUTO_LOAD = ["climate_ir", "ir_remote_base"]
 
 fujitsu_264_ns = cg.esphome_ns.namespace("fujitsu_264")
 Fujitsu264Climate = fujitsu_264_ns.class_("Fujitsu264Climate", climate_ir.ClimateIR)
 
-CONFIG_SCHEMA = climate_ir.climate_ir_with_receiver_schema(Fujitsu264Climate)
+CONFIG_SCHEMA = climate_ir.climate_ir_with_receiver_schema(Fujitsu264Climate).extend(
+    {
+        cv.Optional(CONF_DEBOUNCE): cv.positive_time_period_milliseconds
+    }
+)
 
 
 async def to_code(config):
@@ -21,4 +26,6 @@ async def to_code(config):
     )
     cg.add_define("_IR_ENABLE_DEFAULT_", False)
 
-    await climate_ir.new_climate_ir(config)
+    var = await climate_ir.new_climate_ir(config)
+    if CONF_DEBOUNCE in config:
+        cg.add(var.set_debounce(config[CONF_DEBOUNCE]))

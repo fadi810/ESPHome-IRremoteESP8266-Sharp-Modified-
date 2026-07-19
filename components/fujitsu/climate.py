@@ -2,7 +2,7 @@ import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import climate_ir
 from esphome.components import ir_remote_base
-from esphome.const import CONF_MODEL
+from esphome.const import CONF_MODEL, CONF_DEBOUNCE
 
 CONF_HORIZONTAL_SWING = "horizontal_swing"
 
@@ -25,6 +25,7 @@ CONFIG_SCHEMA = climate_ir.climate_ir_with_receiver_schema(FujitsuClimate).exten
     {
         cv.Required(CONF_MODEL): cv.enum(MODELS),
         cv.Optional(CONF_HORIZONTAL_SWING): cv.boolean,
+        cv.Optional(CONF_DEBOUNCE): cv.positive_time_period_milliseconds
     }
 )
 
@@ -36,3 +37,5 @@ async def to_code(config):
     cg.add(var.set_model(config[CONF_MODEL]))
     if CONF_HORIZONTAL_SWING in config:
         cg.add(var.set_horizontal_swing_supported(config[CONF_HORIZONTAL_SWING]))
+    if CONF_DEBOUNCE in config:
+        cg.add(var.set_debounce(config[CONF_DEBOUNCE]))

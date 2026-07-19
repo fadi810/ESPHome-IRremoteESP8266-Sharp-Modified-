@@ -20,7 +20,7 @@ namespace esphome
         void SharpClimate::transmit_state()
         {
             this->apply_state();
-            this->send();
+            this->send_debounced();
         }
 
         void SharpClimate::send()

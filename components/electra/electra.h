@@ -23,11 +23,10 @@ namespace esphome
 
         protected:
             void transmit_state() override;
+            void send() override;
+            void apply_state() override;
 
         private:
-            void send();
-            void apply_state();
-
             IRElectraAc ac_ = IRElectraAc(255); // pin is not used
         };
 

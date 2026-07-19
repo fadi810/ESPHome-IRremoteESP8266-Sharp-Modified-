@@ -37,7 +37,7 @@ namespace esphome
         void Fujitsu264Climate::transmit_state()
         {
             this->apply_state();
-            this->send();
+            this->send_debounced();
         }
 
         void Fujitsu264Climate::send()

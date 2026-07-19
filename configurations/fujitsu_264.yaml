@@ -22,6 +22,7 @@ climate:
   - platform: fujitsu_264
     id: my_fujitsu_264
     name: 'Fujitsu-264'
+    debounce: 200ms
 
 button:
   - platform: template
