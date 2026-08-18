@@ -10,6 +10,7 @@ namespace esphome
 {
     namespace sharp
     {
+
         enum Model
         {
             A907 = sharp_ac_remote_model_t::A907,
@@ -21,21 +22,42 @@ namespace esphome
         {
         public:
             SharpClimate()
-                : IrRemoteBase(kSharpAcMinTemp, kSharpAcMaxTemp, 1.0f, true, true,
-                               {climate::CLIMATE_FAN_AUTO, climate::CLIMATE_FAN_LOW, climate::CLIMATE_FAN_MEDIUM, climate::CLIMATE_FAN_HIGH},
-                               {climate::CLIMATE_SWING_OFF, climate::CLIMATE_SWING_VERTICAL}) {}
+                : IrRemoteBase(
+                      20,
+                      30,
+                      1.0f,
+                      true,
+                      true,
+                      {climate::CLIMATE_FAN_AUTO,
+                       climate::CLIMATE_FAN_LOW,
+                       climate::CLIMATE_FAN_MEDIUM,
+                       climate::CLIMATE_FAN_HIGH},
+                      {climate::CLIMATE_SWING_OFF,
+                       climate::CLIMATE_SWING_VERTICAL})
+            {
+                this->set_supported_custom_presets({"Timer 30m",
+                                                    "Timer 1h",
+                                                    "Timer 1.5h",
+                                                    "Timer 2h",
+                                                    "Timer Off"});
+            }
 
             void set_model(const Model model);
-
             void setup() override;
 
         protected:
+            void control(const climate::ClimateCall &call) override;
             void transmit_state() override;
             void send() override;
             void apply_state() override;
 
         private:
-            IRSharpAc ac_ = IRSharpAc(255); // pin is not used
+            void apply_timer();
+            void send_timer();
+
+            bool timer_changed_ = false;
+
+            IRSharpAc ac_ = IRSharpAc(255);
         };
 
     } // namespace sharp
